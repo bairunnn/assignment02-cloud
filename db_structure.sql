@@ -41,3 +41,20 @@ set geog = st_makepoint(stop_lon, stop_lat)::geography;
 create index if not exists septa_bus_stops__geog__idx
 on septa.bus_stops using gist
 (geog);
+
+-- Create a spatial index for phl.pwd_parcels using its geog column
+CREATE INDEX IF NOT EXISTS phl_pwd_parcels__geog__idx
+ON phl.pwd_parcels USING gist (geog);
+
+-- Create a spatial index for phl.neighborhoods using its geog column
+CREATE INDEX IF NOT EXISTS phl_neighborhoods__geog__idx
+ON phl.neighborhoods USING gist (geog);
+
+-- Create a spatial index for census.blockgroups_2020 using its geog column
+CREATE INDEX IF NOT EXISTS census_blockgroups_2020__geog__idx
+ON census.blockgroups_2020 USING gist (geog);
+
+-- Verify
+SELECT indexname
+FROM pg_indexes
+WHERE tablename = 'pwd_parcels' AND schemaname = 'phl' AND indexname = 'phl_pwd_parcels__geog__idx';
