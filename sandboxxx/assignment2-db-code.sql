@@ -50,6 +50,7 @@ CREATE TABLE septa.bus_trips (
     bikes_allowed INTEGER
 );
 
+DROP TABLE IF EXISTS septa.bus_shapes;
 CREATE TABLE septa.bus_shapes (
     shape_id TEXT,
     shape_pt_lat DOUBLE PRECISION,

@@ -58,3 +58,17 @@ ON census.blockgroups_2020 USING gist (geog);
 SELECT indexname
 FROM pg_indexes
 WHERE tablename = 'pwd_parcels' AND schemaname = 'phl' AND indexname = 'phl_pwd_parcels__geog__idx';
+
+-- Question 4
+
+ALTER TABLE septa.bus_shapes
+ADD COLUMN shape_geom geometry(LineString, 4326);
+
+UPDATE septa.bus_shapes
+SET shape_geom = public.ST_MakeLine(
+    array_agg(
+        public.ST_SetSRID(public.ST_MakePoint(shape_pt_lon, shape_pt_lat), 4326)
+        ORDER BY shape_pt_sequence
+    )
+)
+GROUP BY shape_id;
