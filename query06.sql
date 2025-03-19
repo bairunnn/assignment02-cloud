@@ -2,7 +2,7 @@
 What are the TOP five neighborhoods according to your accessibility metric?
 */
 
-SELECT 
+SELECT
     name AS neighborhood_name,
     wc_score AS accessibility_metric,
     count_wc_stops AS num_bus_stops_accessible,

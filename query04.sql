@@ -18,8 +18,8 @@ trips.txt contains trips for each route. A trip is a sequence of two or more sto
 */
 
 WITH septa_bus_shapes_geom AS (
-    SELECT 
-        shape_id, 
+    SELECT
+        shape_id,
         public.ST_MakeLine(
             array_agg(
                 public.ST_SetSRID(public.ST_MakePoint(shape_pt_lon, shape_pt_lat), 4326)
@@ -29,15 +29,16 @@ WITH septa_bus_shapes_geom AS (
     FROM septa.bus_shapes
     GROUP BY shape_id
 )
+
 SELECT DISTINCT
     routes.route_short_name,
     trips.trip_headsign,
     public.ST_SetSRID(shapes.shape_geom, 4326)::geography AS shape_geog,
-    ROUND(CAST(public.ST_Length(public.ST_Transform(shapes.shape_geom, 32129)) AS numeric), 0) AS shape_length
+    round((public.ST_Length(public.ST_Transform(shapes.shape_geom, 32129)))::numeric, 0) AS shape_length
 FROM septa_bus_shapes_geom AS shapes
-JOIN septa.bus_trips AS trips
+INNER JOIN septa.bus_trips AS trips
     ON shapes.shape_id = trips.shape_id
-JOIN septa.bus_routes AS routes
+INNER JOIN septa.bus_routes AS routes
     ON trips.route_id = routes.route_id
 ORDER BY shape_length DESC
 LIMIT 2;

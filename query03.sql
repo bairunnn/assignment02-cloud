@@ -13,8 +13,10 @@ SELECT
     stops.stop_name,
     ROUND(CAST(public.ST_Distance(parcels.geog, stops.geog) AS numeric), 2) AS distance_meters
 FROM phl.pwd_parcels AS parcels
-JOIN LATERAL (
-    SELECT stop_name, geog
+INNER JOIN LATERAL (
+    SELECT
+        bus_stops.stop_name,
+        bus_stops.geog
     FROM septa.bus_stops
     ORDER BY parcels.geog <-> septa.bus_stops.geog
     LIMIT 1

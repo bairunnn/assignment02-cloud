@@ -34,11 +34,11 @@ SET stop_desc = (
 );
 
 SELECT
-    stop_id,
-    stop_name,
-    CONCAT('Distance (m) to nearest condom distribution point: ', ordered.stop_desc) AS stop_desc,
-    stop_lon,
-    stop_lat
+    ordered.stop_id,
+    ordered.stop_name,
+    ordered.stop_lon,
+    ordered.stop_lat,
+    CONCAT('Distance (m) to nearest condom distribution point: ', ordered.stop_desc) AS stop_desc
 FROM (
     SELECT
         stop_id,
