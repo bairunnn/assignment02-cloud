@@ -8,7 +8,7 @@ Discuss which dataset you chose for defining Penn's campus.
 
 -- SELECT public.PostGIS_full_version();
 
-SELECT COUNT(*) 
+SELECT COUNT(*) AS count_block_groups
 FROM census.blockgroups_2020 AS bg
 JOIN phl.policeboundary AS pb
 ON public.ST_Contains(public.ST_Transform(pb.geog::geometry, 4326), public.ST_Transform(bg.geog::geometry, 4326));

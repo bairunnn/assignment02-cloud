@@ -14,7 +14,7 @@ septa_bus_stop_blockgroups AS (
     FROM septa.bus_stops AS stops
     INNER JOIN census.blockgroups_2020 AS bg
         ON public.st_dwithin(stops.geog, bg.geog, 800)
-    WHERE bg.geoid LIKE '42101%' -- Filter for just Philadelphia County bus stops
+    WHERE bg.geoid LIKE '42101%' 
 ),
 septa_bus_stop_surrounding_population AS (
     SELECT
@@ -24,7 +24,7 @@ septa_bus_stop_surrounding_population AS (
     INNER JOIN census.population_2020 AS pop
         USING (geoid)
     GROUP BY stops.stop_id
-    HAVING SUM(pop.total) > 500 -- Keep only bus stops having at least 500 people around them
+    HAVING SUM(pop.total) > 500 
 )
 SELECT
     stops.stop_name,

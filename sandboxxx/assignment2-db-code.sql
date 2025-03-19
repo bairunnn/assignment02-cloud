@@ -118,6 +118,8 @@ FROM '/Users/bairun/Documents/GitHub/course-info-spring-2025/assignment2-local/D
 WITH (FORMAT csv, HEADER, DELIMITER ',');
 SELECT * FROM census.population_2020 LIMIT 10;
 
+/* Create spatial index for condoms distribution data */
+CREATE INDEX idx_phl_condoms_geom ON phl.condoms USING GIST (geog);
 
 
 /* ================================================== */
@@ -132,3 +134,4 @@ SELECT * FROM phl.neighborhoods LIMIT 10;
 SELECT * FROM census.blockgroups_2020 LIMIT 10;
 SELECT * FROM census.population_2020 LIMIT 10;
 SELECT * FROM phl.policeboundary;
+SELECT * FROM phl.condoms;

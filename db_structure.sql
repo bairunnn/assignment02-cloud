@@ -72,3 +72,16 @@ SET shape_geom = public.ST_MakeLine(
     )
 )
 GROUP BY shape_id;
+
+-- Question 10
+ALTER TABLE septa.rail_stops
+ADD COLUMN geog geography(Point, 4326);
+
+UPDATE septa.rail_stops
+SET geog = ST_SetSRID(ST_MakePoint(stop_lon, stop_lat), 4326);
+
+CREATE INDEX idx_septa_rail_stops_geog ON septa.rail_stops USING GIST (geog);
+
+ALTER TABLE septa.rail_stops
+  ALTER COLUMN stop_desc TYPE numeric
+  USING CAST(stop_desc AS numeric);
