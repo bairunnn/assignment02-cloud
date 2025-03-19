@@ -113,7 +113,7 @@ ALTER TABLE phl.neighborhoods ADD COLUMN factor_1 DOUBLE PRECISION;
 WITH norm_values AS (
     SELECT
         name,
-        (CAST (count_stops AS DOUBLE PRECISION) / NULLIF(neighborhood_area, 0)) AS raw_value
+        (CAST(count_stops AS DOUBLE PRECISION) / NULLIF(neighborhood_area, 0)) AS raw_value
     FROM phl.neighborhoods
 ),
 
@@ -138,7 +138,7 @@ ALTER TABLE phl.neighborhoods ADD COLUMN factor_2 DOUBLE PRECISION;
 WITH norm_values AS (
     SELECT
         name,
-        (CAST (count_wc_stops AS DOUBLE PRECISION) / NULLIF(neighborhood_area, 0)) AS raw_value
+        (CAST(count_wc_stops AS DOUBLE PRECISION) / NULLIF(neighborhood_area, 0)) AS raw_value
     FROM phl.neighborhoods
 ),
 
