@@ -131,3 +131,4 @@ SELECT * FROM phl.pwd_parcels LIMIT 10;
 SELECT * FROM phl.neighborhoods LIMIT 10;
 SELECT * FROM census.blockgroups_2020 LIMIT 10;
 SELECT * FROM census.population_2020 LIMIT 10;
+SELECT * FROM phl.policeboundary;

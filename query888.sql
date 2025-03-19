@@ -17,3 +17,5 @@
 --     stop_name,
 --     geog
 -- FROM septa.bus_stops;
+
+-- SELECT * FROM phl.policeboundary;

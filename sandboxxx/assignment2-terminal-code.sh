@@ -48,5 +48,15 @@ ogr2ogr \
     -overwrite \
     "/Users/bairun/Documents/GitHub/course-info-spring-2025/assignment2-local/tl_2020_42_bg/tl_2020_42_bg.shp"
 
-
+# Load police data
+ogr2ogr \
+    -f "PostgreSQL" \
+    PG:"host=localhost port=5432 dbname=assignment2byron user=postgres password=7777" \
+    -nln phl.policeboundary \
+    -nlt MULTIPOLYGON \
+    -t_srs EPSG:4326 \
+    -lco GEOMETRY_NAME=geog \
+    -lco GEOM_TYPE=GEOGRAPHY \
+    -overwrite \
+    "/Users/bairun/Documents/GitHub/course-info-spring-2025/assignment2-local/upenn-extent-32129-100mbuffer-dissolved.geojson"
 
