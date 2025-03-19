@@ -1,4 +1,4 @@
-# BYRON's Assignment 02
+# BYRON's Assignment 02 (UPDATED README)
 
 This assignment will work similarly to assignment #1. To complete this assigment you will need to do the following:
 1.  Fork this repository to your own account.
@@ -155,7 +155,7 @@ There are several datasets that are prescribed for you to use in this part. Belo
 
         Alternatively you can use the results from the [Census API](https://api.census.gov/data/2020/dec/pl?get=NAME,GEO_ID,P1_001N&for=block%20group:*&in=state:42%20county:*), but you'll still have to transform the JSON that it gives you into a CSV.
 
-## Questions
+## Questions AND RESPONSES
 
 1.  Which **eight** bus stop have the largest population within 800 meters? As a rough estimation, consider any block group that intersects the buffer as being part of the 800 meter buffer.
 
@@ -216,6 +216,35 @@ There are several datasets that are prescribed for you to use in this part. Belo
 
     **Description:**
 
+    My accessibility metric (Wheelchair Accessibility Score, WAS) is rather simple, taking into account threee inputs:
+
+        1. Density of bus stops in the neighborhood, normalized (0-1)
+        (Higher = better WAS)
+        Inputs:
+        - Count of bus stops in the neighborhood
+        - Area of neighborhood
+
+        2. Proportion of wheelchair-accessible bus stops in the neighborhood, normalized (0-1)
+        (Higher = better WAS)
+        Inputs:
+        - Count of wheelchair-accessible bus stops in the neighborhood
+        - Total count of bus stops in the neighborhood
+
+        3. Indicator for number of bus routes passing through the neighborhood
+        Inputs:
+        - Number of bus routes intersecting each neighborhood
+        - If <= 10 then 1
+        - If > 10 and <= 20 then 1.1
+        - If > 20 and <= 30 then 1.2
+        - If > 30 and <= 40 then 1.3
+        - If > 40 and <= 50 then 1.4
+        - If > 50 and <= 100 then 1.5
+        - If > 100 and <= 150 then 1.6
+        - If > 150 then 1.7
+
+        Calculation:
+        Index = #1 * #2 * #3
+
 6.  What are the _top five_ neighborhoods according to your accessibility metric?
 
 7.  What are the _bottom five_ neighborhoods according to your accessibility metric?
@@ -240,6 +269,10 @@ There are several datasets that are prescribed for you to use in this part. Belo
     ```
 
     **Discussion:**
+
+        I chose the Penn Police Department patrol map, which shows a contiguous area in the main campus where there is campus police presence.
+
+        The .geojson file is manually derived from the police map at https://www.publicsafety.upenn.edu/about/uppd/
 
 9. With a query involving PWD parcels and census block groups, find the `geo_id` of the block group that contains Meyerson Hall. `ST_MakePoint()` and functions like that are not allowed.
 

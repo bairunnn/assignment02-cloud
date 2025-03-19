@@ -7,7 +7,7 @@ Rate neighborhoods by their bus stop accessibility for wheelchairs.
 
 /*
 Approach:
-Two components to wheelchair accessibility score (WAS)
+Three components to wheelchair accessibility score (WAS)
 
 1. Density of bus stops in the neighborhood, normalized (0-1)
 (Higher = better WAS)
